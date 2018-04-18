@@ -6,20 +6,20 @@ from string import punctuation as special
 
 # special = '!.*;$#@'  # These were specifically mentioned
 
-actualname = ''
-username = ''
+ACTUAL_NAME = ''
+USER_NAME = ''
 
 CHAR_TYPES = [digits, lowercase, special, uppercase]
 DICTIONARY = 'util/dictionary.txt'
 PHPBB = 'util/phpbb.txt'
-rockyou = 'util/rockyou.txt'
-DICTS = [DICTIONARY, PHPBB, rockyou]
+ROCKYOU = 'util/rockyou.txt'
+DICTS = [DICTIONARY, PHPBB, ROCKYOU]
 
 
-def read_file(file):
+def read_file(filename):
     try:
-        with open(file) as f:
-            for line in f:
+        with open(filename) as file:
+            for line in file:
                 yield line.rstrip()
     except UnicodeDecodeError:
         # LOL, like my hack around this one??
@@ -52,24 +52,24 @@ def check_characters(password):
                     count += 1
                     found[i] = 1
                     break
-    return True if count >=3 else False
+    return True if count >= 3 else False
 
 
 def not_using_username(password):
-    global username
-    if not username:
-        username = input('username: ')
+    global USER_NAME
+    if not USER_NAME:
+        USER_NAME = input('username: ')
 
-    return False if username.lower() in password.lower() else True
+    return False if USER_NAME.lower() in password.lower() else True
 
 
 def not_using_name(password):
-    global actualname
-    if not actualname:
-        actualname = input('First and last name: ')
+    global ACTUAL_NAME
+    if not ACTUAL_NAME:
+        ACTUAL_NAME = input('First and last name: ')
 
-    firstname = actualname.split()[0]
-    lastname = actualname.split()[-1]
+    firstname = ACTUAL_NAME.split()[0]
+    lastname = ACTUAL_NAME.split()[-1]
 
     for name in [firstname, lastname]:
         if name.lower() in password.lower():
@@ -95,9 +95,9 @@ def validate(password):
 
 if __name__ == '__main__':
     while True:
-        passwd = getpass('password: ')
-        if validate(passwd):
-            print(f'Your password is good!: {passwd}')
+        PASSWD = getpass('password: ')
+        if validate(PASSWD):
+            print('Your password is good!')
             break
         else:
-            print(f'Your password sucks! {passwd}')
+            print(f'Your password is invalid! {PASSWD}')
