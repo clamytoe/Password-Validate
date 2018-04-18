@@ -68,10 +68,10 @@ def not_using_name(password):
     if not ACTUAL_NAME:
         ACTUAL_NAME = input('First and last name: ')
 
-    firstname = ACTUAL_NAME.split()[0]
-    lastname = ACTUAL_NAME.split()[-1]
+    first_name = ACTUAL_NAME.split()[0]
+    last_name = ACTUAL_NAME.split()[-1]
 
-    for name in [firstname, lastname]:
+    for name in [first_name, last_name]:
         if name.lower() in password.lower():
             return False
     return True
