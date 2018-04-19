@@ -106,5 +106,6 @@ ENV/
 # Visual Studio Code
 .vscode/
 
-# Dictionary files
+# Project files
 util/*
+.validated_passwords
