@@ -50,8 +50,7 @@ class Account:
     def _not_using_username(self, password):
         if self.username.lower() in password.lower():
             return False
-        else:
-            return True
+        return True
 
     def _not_using_name(self, password):
         for name in [self.first_name, self.last_name]:
@@ -69,8 +68,8 @@ class Account:
                 'username': self.username,
                 'passwords': self.used_passwords,
             }
-            with open(PASSWD_FILE, 'w') as pf:
-                json.dump(data, pf, default=str)
+            with open(PASSWD_FILE, 'w') as file:
+                json.dump(data, file, default=str)
             print('The password has been stored. Bye!')
         else:
             print('Password not saved, already in use.')
@@ -122,8 +121,8 @@ def check_password(user):
 
 
 def load_data():
-    with open(PASSWD_FILE, 'r') as pf:
-        data = json.load(pf)
+    with open(PASSWD_FILE, 'r') as file:
+        data = json.load(file)
     name = data['name']
     username = data['username']
     user = Account(name, username)
