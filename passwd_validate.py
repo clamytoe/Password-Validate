@@ -27,7 +27,7 @@ from utils import check_length, hashit, not_in_dict
 
 # special = '!.*;$#@'  # These were specifically mentioned
 
-PASSWD_FILE = '.validated_passwords'
+PASSWD_FILE = ".validated_passwords"
 
 
 class Account:
@@ -113,11 +113,11 @@ class Account:
         :return: None
         """
         data = {
-            'name': f'{self.first_name} {self.last_name}',
-            'username': self.username,
-            'passwords': self.used_passwords,
+            "name": f"{self.first_name} {self.last_name}",
+            "username": self.username,
+            "passwords": self.used_passwords,
         }
-        with open(PASSWD_FILE, 'w') as file:
+        with open(PASSWD_FILE, "w") as file:
             json.dump(data, file, default=str)
 
     def store(self, password):
@@ -131,9 +131,9 @@ class Account:
             hashed = hashit(password)
             self.used_passwords[hashed] = datetime.datetime.today()
             self.save()
-            print('The password has been stored.')
+            print("The password has been stored.")
         else:
-            print('Password not saved, already in use.')
+            print("Password not saved, already in use.")
 
     def validate(self, password):
         """
@@ -141,7 +141,7 @@ class Account:
         :param password: String of the password to validate
         :return: Boolean, True if it passes all checks and False otherwise
         """
-        msg = 'The password'
+        msg = "The password"
         checks = [
             check_length,
             not_in_dict,
@@ -151,12 +151,12 @@ class Account:
             self._check_used,
         ]
         messages = [
-            f'{msg} is not long enough.',
-            f'{msg} is a commonly used one.',
-            f'{msg} does not contain 3 of the 4 required character types.',
-            f'{msg} is using part of your name.',
-            f'{msg} is using your username.',
-            f'{msg} was used less than a year ago.'
+            f"{msg} is not long enough.",
+            f"{msg} is a commonly used one.",
+            f"{msg} does not contain 3 of the 4 required character types.",
+            f"{msg} is using part of your name.",
+            f"{msg} is using your username.",
+            f"{msg} was used less than a year ago.",
         ]
 
         for i, check in enumerate(checks):
@@ -175,21 +175,21 @@ def check_password(user):
     :return: None
     """
     while True:
-        password = getpass('Password: ')
+        password = getpass("Password: ")
 
         if user.validate(password):
-            password2 = getpass('Confirm it: ')
+            password2 = getpass("Confirm it: ")
             if password == password2:
-                choice = input('Would you like to store it? ([y]/n)')
-                if not choice or choice.lower().startswith('y'):
+                choice = input("Would you like to store it? ([y]/n)")
+                if not choice or choice.lower().startswith("y"):
                     user.store(password)
                     # print(user.used_passwords)
                     break
                 else:
-                    print('Ok, bye!')
+                    print("Ok, bye!")
                     break
             else:
-                print('Sorry, the passwords did not match...')
+                print("Sorry, the passwords did not match...")
 
 
 def load_data():
@@ -197,17 +197,17 @@ def load_data():
     Loads the JSON data with the user's account information if found.
     :return: Account object with the user's information
     """
-    with open(PASSWD_FILE, 'r') as file:
+    with open(PASSWD_FILE, "r") as file:
         data = json.load(file)
-    name = data['name']
-    username = data['username']
+    name = data["name"]
+    username = data["username"]
     user = Account(name, username)
 
     # convert the timestamps into datetime objects
-    if data['passwords']:
-        user.used_passwords = data['passwords']
-        for key, value in data['passwords'].items():
-            date = datetime.datetime.strptime(value, '%Y-%m-%d %H:%M:%S.%f')
+    if data["passwords"]:
+        user.used_passwords = data["passwords"]
+        for key, value in data["passwords"].items():
+            date = datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S.%f")
             user.used_passwords[key] = date
     return user
 
@@ -230,17 +230,17 @@ def main():
     if pw_file.is_file():
         user = load_data()
     else:
-        name = input('First and Last name: ')
-        username = input('Username: ')
+        name = input("First and Last name: ")
+        username = input("Username: ")
         user = Account(name, username)
         user.save()
 
     try:
         check_password(user)
     except KeyboardInterrupt:
-        print('\n\nProgram aborted by user. Exiting...\n')
+        print("\n\nProgram aborted by user. Exiting...\n")
         exit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
