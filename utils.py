@@ -52,7 +52,7 @@ def check_length(password):
     :param password: String of the password
     :return: Boolean, True if it meets the requirement, False otherwise
     """
-    return False if len(password) < 10 else True
+    return len(password) >= 10
 
 
 def read_file(filename):
