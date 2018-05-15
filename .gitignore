@@ -107,5 +107,5 @@ ENV/
 .vscode/
 
 # Project files
-dictionary_files/*
+dictionary_files/
 .validated_passwords
