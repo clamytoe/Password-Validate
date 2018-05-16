@@ -192,6 +192,19 @@ def check_password(user):
                 print("Sorry, the passwords did not match...")
 
 
+def get_info():
+    name = input("First and Last name: ")
+    username = input("Username: ")
+    return name, username
+
+
+def get_name():
+    while True:
+        name = input("First and Last name: ")
+        if len(name.split()) > 1:
+            return name
+        print("")
+
 def load_data():
     """
     Loads the JSON data with the user's account information if found.
@@ -230,8 +243,7 @@ def main():
     if pw_file.is_file():
         user = load_data()
     else:
-        name = input("First and Last name: ")
-        username = input("Username: ")
+        name, username = get_info()
         user = Account(name, username)
         user.save()
 
