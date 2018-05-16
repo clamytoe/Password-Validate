@@ -107,5 +107,5 @@ ENV/
 .vscode/
 
 # Project files
-dictionary_files/
+rockyou.txt
 .validated_passwords

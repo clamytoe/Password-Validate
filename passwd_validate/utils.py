@@ -7,10 +7,16 @@ that are also useful for external consumption.
 """
 import hashlib
 
-DICTIONARY = "dictionary_files/dictionary.txt"
-PHPBB = "dictionary_files/phpbb.txt"
-ROCKYOU = "dictionary_files/rockyou.txt"
-DICTS = [DICTIONARY, PHPBB, ROCKYOU]
+from os.path import abspath, dirname, join
+
+DICTIONARY_LOC = "dictionary_files"
+DICTIONARY = "dictionary.txt"
+PHPBB = "phpbb.txt"
+ROCKYOU = "rockyou.txt"
+DICTS = [
+    DICTIONARY,
+    PHPBB,
+]
 
 
 def hashit(password):
@@ -52,8 +58,10 @@ def read_file(filename):
     :param filename: String with the path and filename of the dictionary
     :return: String generator with each line of the dictionary
     """
+    file_loc = dirname(abspath(__file__))
+    data_loc = join(file_loc, DICTIONARY_LOC, filename)
     try:
-        with open(filename) as file:
+        with open(data_loc) as file:
             for line in file:
                 yield line.rstrip()
     except UnicodeDecodeError:
