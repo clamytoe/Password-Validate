@@ -23,7 +23,7 @@ from string import ascii_uppercase as uppercase
 from string import digits
 from string import punctuation as special
 
-from utils import check_length, hashit, not_in_dict
+from utils import hashit, not_in_dict
 
 # special = '!.*;$#@'  # These were specifically mentioned
 
@@ -73,6 +73,14 @@ class Account:
             age = (today - stored).days
             return age >= 365
         return False
+    
+    def _check_length(password):
+        """
+        Checks to see if the password meets the minimum length policy.
+        :param password: String of the password
+        :return: Boolean, True if it meets the requirement, False otherwise
+        """
+        return len(password) >= 10
 
     def _not_using_username(self, password):
         """
@@ -130,20 +138,20 @@ class Account:
         """
         msg = "The password"
         checks = [
-            check_length,
-            not_in_dict,
+            self._check_length,
             self._check_characters,
             self._not_using_name,
             self._not_using_username,
             self._check_used,
+            not_in_dict,
         ]
         messages = [
             f"{msg} is not long enough.",
-            f"{msg} is a commonly used one.",
             f"{msg} does not contain 3 of the 4 required character types.",
             f"{msg} is using part of your name.",
             f"{msg} is using your username.",
             f"{msg} was used less than a year ago.",
+            f"{msg} is a commonly used one.",
         ]
 
         for i, check in enumerate(checks):
