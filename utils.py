@@ -46,15 +46,6 @@ def not_in_dict(password):
     return True
 
 
-def check_length(password):
-    """
-    Checks to see if the password meets the minimum length policy.
-    :param password: String of the password
-    :return: Boolean, True if it meets the requirement, False otherwise
-    """
-    return len(password) >= 10
-
-
 def read_file(filename):
     """
     Helper function that simple iterates over the dictionary files.
