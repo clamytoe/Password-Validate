@@ -72,7 +72,7 @@ class Account:
             stored = self.used_passwords[hashed]
             age = (today - stored).days
             return age >= 365
-        return False
+        return True
     
     def _check_length(password):
         """
