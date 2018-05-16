@@ -19,17 +19,28 @@ It's just a starting point, but hopefully I can improve on it.
 * Not reused within 365 days (if password hash is stored)
 
 ## Dictionaries Files
-I grabbed a tarball of password files from [skullsecurity.org](https://blog.skullsecurity.org/2010/the-ultimate-faceoff-between-password-lists). The file is way to big to provide here.
+I grabbed a tarball of password files from [skullsecurity.org](https://blog.skullsecurity.org/2010/the-ultimate-faceoff-between-password-lists). The rockyou.txt file is way to big to include here, but I've included phpbb.txt.
 
 I used the following files from it:
 * phpbb.txt
 * rockyou.txt
 
-The common word dictionary I grabbed from my bud's over at [Pybites](https://pybit.es/):
+The common word dictionary I grabbed from my bud's over at [Pybites](https://pybit.es/). I've also included it:
 * [dictionary,txt](http://bit.ly/2iQ3dlZ)
 
+## How To Install
+I highly recommend that you keep your system's Python installation clean and use a virtual environment. Once you are ready to install the script, clone the repository and then install it with pip:
+
+```bash
+git clone https://github.com/clamytoe/Password-Validate.git
+cd Password-Validate
+pip install -e .
+```
+
 ## How To Use
-On initial run, the script will prompt you for the following data:
+Once the script has been installed, simply run with `passwd_validate`.
+On the initial run, the script will prompt you for the following data:
+
 * First and Last name
 * Company username
 
