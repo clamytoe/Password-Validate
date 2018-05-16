@@ -46,8 +46,8 @@ def not_in_dict(password):
         for word in dict_words:
             if "dictionary" in passwd_file and len(word) < 5:
                 # skip common words under 5 characters long
-                break
-            if password in word:
+                continue
+            if password == word or password.lower() == word.lower():
                 return False
     return True
 
