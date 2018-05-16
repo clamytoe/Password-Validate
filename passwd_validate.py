@@ -74,7 +74,8 @@ class Account:
             return age >= 365
         return True
     
-    def _check_length(self, password):
+    @staticmethod
+    def _check_length(password):
         """
         Checks to see if the password meets the minimum length policy.
         :param password: String of the password
