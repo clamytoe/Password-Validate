@@ -13,7 +13,7 @@ from passwd_validate.utils import hashit, not_in_dict, read_file
 TEST_FILE = Path(".test_file")
 NAME = "John Doe"
 USERNAME = "e7654321"
-BAD_PASSWD = "password123"
+BAD_PASSWD = "Password1234"
 GOOD_PASSWD = "C0d3J@ck3r!"
 
 
@@ -46,15 +46,15 @@ def test_get_name(capfd, monkeypatch):
 
 
 def test_hashit():
-    hashed = "bed4efa1d4fdbd954bd3705d6a2a78270ec9a52ecfbfb010c61862af5c76a" \
-             "f1761ffeb1aef6aca1bf5d02b3781aa854fabd2b69c790de74e17ecfec3cb" \
-             "6ac4bf"
+    hashed = "20b0747eefcdc16fa4fb06bbf9284303645ecc3d2c43927878bd513f06853" \
+             "191c104aebae6d7fca6291f1e296c6af99ebf8a137cbd7a0d34f2e27b31cb" \
+             "4fecdb"
     hashed_passwd = hashit(BAD_PASSWD)
     assert hashed_passwd == hashed
 
 
 def test_not_in_dict_false():
-    result = not_in_dict("Password1234")
+    result = not_in_dict(BAD_PASSWD)
     assert result is False
 
 
