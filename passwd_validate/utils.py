@@ -60,10 +60,10 @@ def read_file(filename):
     """
     file_loc = dirname(abspath(__file__))
     data_loc = join(file_loc, DICTIONARY_LOC, filename)
-    try:
-        with open(data_loc, "rb") as file:
-            for line in file:
+    with open(data_loc, "rb") as file:
+        for line in file:
+            try:
                 yield line.decode("utf-8").rstrip()
-    except UnicodeDecodeError:
-        # LOL, like my hack around this one??
-        yield "error"
+            except UnicodeDecodeError:
+                # LOL, like my hack around this one??
+                continue
