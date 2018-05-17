@@ -55,7 +55,7 @@ def get_name():
         if len(name.split()) > 1:
             return name
         else:
-            print("You're first and last name are required!")
+            print("Your first and last name are required!")
 
 
 def get_username():
