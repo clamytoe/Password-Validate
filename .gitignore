@@ -113,3 +113,6 @@ rockyou.txt
 
 # Pytest
 .pytest_cache/
+
+# Jupyter notebook
+*.ipynb
