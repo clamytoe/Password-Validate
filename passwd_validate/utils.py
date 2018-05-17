@@ -44,10 +44,10 @@ def not_in_dict(password):
     for passwd_file in DICTS:
         dict_words = read_file(passwd_file)
         for word in dict_words:
-            if "dictionary" in passwd_file and len(word) < 5:
+            if "dictionary.txt" in passwd_file and len(word) < 5:
                 # skip common words under 5 characters long
                 continue
-            if password == word or password.lower() == word.lower():
+            if password == word:
                 return False
     return True
 
@@ -61,9 +61,9 @@ def read_file(filename):
     file_loc = dirname(abspath(__file__))
     data_loc = join(file_loc, DICTIONARY_LOC, filename)
     try:
-        with open(data_loc) as file:
+        with open(data_loc, "rb") as file:
             for line in file:
-                yield line.rstrip()
+                yield line.decode("utf-8").rstrip()
     except UnicodeDecodeError:
         # LOL, like my hack around this one??
         yield "error"
