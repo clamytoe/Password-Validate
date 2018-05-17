@@ -41,7 +41,7 @@ def test_get_name(capfd, monkeypatch):
     monkeypatch.setitem(__builtins__, "input", lambda prompt: next(values_gen))
     name = get_name()
     output = capfd.readouterr()[0]
-    assert "You're first and last name are required!" in output
+    assert "Your first and last name are required!" in output
     assert name == NAME
 
 
