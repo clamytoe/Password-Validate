@@ -16,8 +16,11 @@ setup(
     author_email=EMAIL,
     description="Small little utility to assist you with validating passwords",
     include_package_data=True,
+    install_requirements=[
+        'pytest',
+    ],
     entry_points="""
         [console_scripts]
-        passwd_validate=passwd_validate.app:main
+        pval=passwd_validate.app:main
     """,
 )

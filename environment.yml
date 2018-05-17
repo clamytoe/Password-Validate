@@ -1,0 +1,6 @@
+name: pval
+channels:
+  - defaults
+dependencies:
+  - pytest=3.4.1
+  - python=3.6.4
