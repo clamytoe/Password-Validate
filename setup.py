@@ -7,7 +7,7 @@ AUTHOR = passwd_validate.__author__
 EMAIL = passwd_validate.__email__
 
 setup(
-    name="passwd_validate",
+    name="pval",
     version=VERSION,
     packages=find_packages(),
     url="https://github.com/clamytoe/Password-Validate",
