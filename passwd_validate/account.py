@@ -9,7 +9,7 @@ from string import punctuation as special
 
 from passwd_validate.utils import hashit, not_in_dict
 
-PASSWD_FILE = ".validated_passwords"
+PASSWD_FILE = ".pval_db"
 
 
 class Account:
@@ -29,6 +29,14 @@ class Account:
         self.last_name = fullname.split()[-1]
         self.username = username
         self.used_passwords = {}
+
+    def __len__(self):
+        return len(self.used_passwords)
+
+    def __repr__(self):
+        desc = f"Account(firstname='{self.first_name} {self.last_name}', " \
+               f"username='{self.username})'"
+        return desc
 
     def _check_characters(self, password):
         """
