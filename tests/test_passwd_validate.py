@@ -6,11 +6,9 @@ import pytest
 from pathlib import Path
 
 from passwd_validate.account import Account, PASSWD_FILE
-from passwd_validate.app import (
-    check_password, get_name, get_username, load_data)
+from passwd_validate.app import get_name, get_username, load_data
 from passwd_validate.utils import hashit, not_in_dict, read_file
 
-TEST_FILE = Path(".test_file")
 NAME = "John Doe"
 USERNAME = "e7654321"
 BAD_PASSWD = "Password1234"
@@ -22,19 +20,6 @@ def dummy_account():
     return Account(NAME, USERNAME)
 
 
-def test_failed_account_creation():
-    with pytest.raises(TypeError):
-        Account()
-
-
-def test_account_creation(dummy_account):
-    assert isinstance(dummy_account, Account)
-    assert dummy_account.first_name == "John"
-    assert dummy_account.last_name == "Doe"
-    assert dummy_account.username == "e7654321"
-    assert len(dummy_account.used_passwords) == 0
-
-
 def test_get_name(capfd, monkeypatch):
     values = ["John", NAME]
     values_gen = (i for i in values)
@@ -43,6 +28,12 @@ def test_get_name(capfd, monkeypatch):
     output = capfd.readouterr()[0]
     assert "Your first and last name are required!" in output
     assert name == NAME
+
+
+def test_get_username(monkeypatch):
+    monkeypatch.setitem(__builtins__, "input", lambda prompt: USERNAME)
+    username = get_username()
+    assert username == USERNAME
 
 
 def test_hashit():
@@ -61,3 +52,46 @@ def test_not_in_dict_false():
 def test_not_in_dict_true():
     result = not_in_dict(GOOD_PASSWD)
     assert result is True
+
+
+def test_failed_account_creation():
+    with pytest.raises(TypeError):
+        Account()
+
+
+def test_account_creation(dummy_account):
+    assert isinstance(dummy_account, Account)
+    assert dummy_account.first_name == "John"
+    assert dummy_account.last_name == "Doe"
+    assert dummy_account.username == "e7654321"
+    assert len(dummy_account.used_passwords) == 0
+
+
+def test_validate(dummy_account):
+    valid = dummy_account.validate(BAD_PASSWD)
+    assert valid is False
+    valid = dummy_account.validate(GOOD_PASSWD)
+    assert valid is True
+
+
+def test_read_file():
+    file = read_file("dictionary.txt")
+    assert type(file).__qualname__ == "generator"
+    assert next(file) == "A"
+    assert next(file) == "a"
+
+
+def test_load_data():
+    pw_file = Path(PASSWD_FILE)
+    assert PASSWD_FILE == ".pval_db"
+    if pw_file.exists():
+        user = load_data()
+        assert isinstance(user, Account)
+
+
+def test_str_method(dummy_account):
+    fullname = f"{dummy_account.first_name} {dummy_account.last_name}"
+    assert "Account(" in str(dummy_account)
+    assert fullname in str(dummy_account)
+    assert dummy_account.username in str(dummy_account)
+
