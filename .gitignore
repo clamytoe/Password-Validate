@@ -107,8 +107,7 @@ ENV/
 .vscode/
 
 # Project files
-.test_file
-.validated_passwords
+.pval_db
 rockyou.txt
 
 # Pytest
